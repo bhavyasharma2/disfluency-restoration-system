@@ -2,7 +2,7 @@
 
 This project addresses the task of **Automatic Disfluency Restoration**: reconstructing the original *spoken*, disfluent transcript (with fillers, hesitations, and repetitions) from a **clean transcript and its corresponding speech audio**.
 
-This work focuses on building a **robust, compute-efficient hybrid ASR–NLP pipeline** suitable for Kaggle notebook environments.
+The work focuses on building a **robust, compute-efficient hybrid ASR–NLP pipeline** designed to run within **Kaggle notebook constraints**.
 
 ---
 
@@ -18,53 +18,76 @@ While many speech and NLP systems aim to *remove* these artifacts, this task req
 
 > **Restore disfluencies that were originally spoken but removed from clean transcripts.**
 
+The challenge lies in reintroducing disfluencies **accurately and conservatively**, using both **audio evidence** and **learned text patterns**, without hallucination.
+
 ---
 
 ## Dataset Description
 
-The dataset used in this project is the **NPPE-2: Automatic Disfluency Restoration** dataset and is **included alongside the code in this repository**.
+The dataset used in this project is the official **NPPE-2: Automatic Disfluency Restoration** dataset provided via Kaggle Competitions.
 
-### Dataset Contents
-
-The dataset contains both text and audio modalities:
-
-#### Training Data
-
-* **Disfluent transcripts** (text)
-* **List of unique disfluency tokens**
-* Used to automatically derive clean transcripts and learn disfluency insertion patterns
-
-#### Test Data
-
-* **Clean transcripts** (text)
-* **Corresponding speech audio** (`.wav`)
-* Goal: predict the original disfluent transcript
+Due to its large size (~860 MB), the dataset is **not included in this GitHub repository**. Instead, it must be downloaded directly from Kaggle.
 
 ---
 
-## Using the Dataset with Kaggle
+## Downloading the Dataset (Required)
 
-Although the dataset is included in this repository, the notebook is designed to be executed **inside a Kaggle Notebook**.
+### Prerequisites
 
-### Step 1: Download the Repository
-
-* Download or clone this GitHub repository to your local system.
-* Ensure the dataset files are present exactly as provided.
+* A Kaggle account
+* Kaggle API credentials (`kaggle.json`) configured
+  👉 [https://www.kaggle.com/docs/api](https://www.kaggle.com/docs/api)
 
 ---
 
-### Step 2: Upload Data to Kaggle Notebook
+### Step 1: Download Dataset Using Kaggle CLI
+
+Run the following command:
+
+```bash
+kaggle competitions download -c nppe-2-automatic-disfluency-restoration
+```
+
+This will download a ZIP file containing the full dataset.
+
+---
+
+### Step 2: Extract the Dataset
+
+Unzip the downloaded file:
+
+```bash
+unzip nppe-2-automatic-disfluency-restoration.zip
+```
+
+This will extract the dataset files and audio folders.
+
+---
+
+## Running the Notebook on Kaggle
+
+This project is intended to be executed **inside a Kaggle Notebook**.
+
+### Step 1: Upload Files to Kaggle Notebook
 
 1. Open **Kaggle → Notebooks**
 2. Create a new notebook
-3. Upload this notebook file
-4. Upload the dataset folder manually via the **“Add Data” → “Upload”** option
+3. Upload:
+
+   * The notebook file from this repository
+   * The extracted dataset folder via **“Add Data → Upload”**
+
+Kaggle will mount the uploaded dataset under:
+
+```bash
+/kaggle/input/
+```
 
 ---
 
-### Step 3: Expected Directory Structure in Kaggle
+### Step 2: Expected Dataset Directory Structure
 
-Once uploaded, the dataset must be available in the Kaggle environment with the following structure:
+After upload, the dataset must appear **exactly as follows** inside the Kaggle environment:
 
 ```
 /kaggle/input/nppe-2-automatic-disfluency-restoration/
@@ -77,26 +100,26 @@ Once uploaded, the dataset must be available in the Kaggle environment with the 
     └── ...
 ```
 
-> The folder name and structure must remain unchanged for the notebook to run correctly.
+**Do not rename the folder or change the internal structure**, as the notebook relies on fixed paths.
 
 ---
 
-### Step 4: Dataset Path Used in Code
+### Step 3: Dataset Path Used in Code
 
-The notebook assumes the following dataset paths:
+The notebook assumes the following paths:
 
 ```python
 INPUT_DIR = '/kaggle/input/nppe-2-automatic-disfluency-restoration'
 AUDIO_DIR = os.path.join(INPUT_DIR, 'downloaded_audios')
 ```
 
-No additional configuration is required.
+No further configuration is required.
 
 ---
 
 ## Approach Summary
 
-Instead of training a large end-to-end generation model, this project adopts a **hybrid, evidence-driven approach** that balances accuracy and computational efficiency.
+Rather than training a large end-to-end generation model, this project adopts a **hybrid, evidence-driven approach** that balances accuracy, interpretability, and computational efficiency.
 
 ### 1. Data Preprocessing
 
@@ -150,11 +173,12 @@ This design prioritizes **precision over hallucination**, ensuring natural and r
 
 ## How to Run
 
-1. Open a Kaggle Notebook.
-2. Upload this notebook file.
-3. Upload the dataset folder as described above.
-4. Run all notebook cells sequentially.
-5. The final predictions will be written to:
+1. Download the dataset using the Kaggle CLI.
+2. Extract the dataset ZIP.
+3. Open a Kaggle Notebook.
+4. Upload the notebook file and extracted dataset folder.
+5. Run all notebook cells sequentially.
+6. The final predictions will be written to:
 
 ```bash
 submission.csv
@@ -171,7 +195,7 @@ submission.csv
 
 ---
 
-## Outcome
+## 🏁 Outcome
 
 This project demonstrates:
 
@@ -181,8 +205,10 @@ This project demonstrates:
 
 ---
 
-## License
+## 📄 License
 
-This project is intended for academic and educational use only.
+This project is intended for **academic and educational use only**.
+Dataset ownership and licensing remain with the original Kaggle competition organizers. of this project
+
 * Decide what files to include in `.gitignore`
 * Create a **pipeline diagram** for the README
