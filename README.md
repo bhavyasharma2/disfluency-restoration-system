@@ -2,7 +2,7 @@
 
 This project addresses the task of **Automatic Disfluency Restoration**: reconstructing the original *spoken*, disfluent transcript (with fillers, hesitations, and repetitions) from a **clean transcript and its corresponding speech audio**.
 
-The work focuses on building a **robust, compute-efficient hybrid ASR–NLP pipeline** suitable for Kaggle notebook environments.
+This work focuses on building a **robust, compute-efficient hybrid ASR–NLP pipeline** suitable for Kaggle notebook environments.
 
 ---
 
@@ -20,17 +20,21 @@ While many speech and NLP systems aim to *remove* these artifacts, this task req
 
 ---
 
-## Dataset Description 
+## Dataset Description
 
-The dataset used in this project contains both text and audio modalities.
+The dataset used in this project is the **NPPE-2: Automatic Disfluency Restoration** dataset and is **included alongside the code in this repository**.
 
-### Training Data
+### Dataset Contents
+
+The dataset contains both text and audio modalities:
+
+#### Training Data
 
 * **Disfluent transcripts** (text)
-* **Unique disfluency token list**
+* **List of unique disfluency tokens**
 * Used to automatically derive clean transcripts and learn disfluency insertion patterns
 
-### Test Data
+#### Test Data
 
 * **Clean transcripts** (text)
 * **Corresponding speech audio** (`.wav`)
@@ -38,35 +42,29 @@ The dataset used in this project contains both text and audio modalities.
 
 ---
 
-## Importing the Dataset in Kaggle
+## Using the Dataset with Kaggle
 
-This project is designed to run **inside a Kaggle Notebook**.
+Although the dataset is included in this repository, the notebook is designed to be executed **inside a Kaggle Notebook**.
 
-### Step 1: Upload Dataset to Kaggle
+### Step 1: Download the Repository
 
-1. Go to **Kaggle → Datasets**
-2. Create a new dataset and upload the dataset files
-
----
-
-### Step 2: Attach Dataset to Notebook
-
-In your Kaggle Notebook:
-
-1. Click **“Add Data”**
-2. Attach the dataset you uploaded
-
-Kaggle will automatically mount the dataset at:
-
-```bash
-/kaggle/input/<dataset-name>/
-```
+* Download or clone this GitHub repository to your local system.
+* Ensure the dataset files are present exactly as provided.
 
 ---
 
-### Step 3: Expected Directory Structure
+### Step 2: Upload Data to Kaggle Notebook
 
-Ensure the dataset follows this structure:
+1. Open **Kaggle → Notebooks**
+2. Create a new notebook
+3. Upload this notebook file
+4. Upload the dataset folder manually via the **“Add Data” → “Upload”** option
+
+---
+
+### Step 3: Expected Directory Structure in Kaggle
+
+Once uploaded, the dataset must be available in the Kaggle environment with the following structure:
 
 ```
 /kaggle/input/nppe-2-automatic-disfluency-restoration/
@@ -79,11 +77,13 @@ Ensure the dataset follows this structure:
     └── ...
 ```
 
+> The folder name and structure must remain unchanged for the notebook to run correctly.
+
 ---
 
 ### Step 4: Dataset Path Used in Code
 
-The notebook assumes the following paths:
+The notebook assumes the following dataset paths:
 
 ```python
 INPUT_DIR = '/kaggle/input/nppe-2-automatic-disfluency-restoration'
@@ -96,7 +96,7 @@ No additional configuration is required.
 
 ## Approach Summary
 
-Instead of training a large end-to-end generation model, this project adopts a **hybrid, evidence-driven approach** that balances accuracy and compute efficiency.
+Instead of training a large end-to-end generation model, this project adopts a **hybrid, evidence-driven approach** that balances accuracy and computational efficiency.
 
 ### 1. Data Preprocessing
 
@@ -150,10 +150,11 @@ This design prioritizes **precision over hallucination**, ensuring natural and r
 
 ## How to Run
 
-1. Open the notebook in a Kaggle environment.
-2. Attach the dataset as described above.
-3. Run all notebook cells sequentially.
-4. The final predictions will be written to:
+1. Open a Kaggle Notebook.
+2. Upload this notebook file.
+3. Upload the dataset folder as described above.
+4. Run all notebook cells sequentially.
+5. The final predictions will be written to:
 
 ```bash
 submission.csv
