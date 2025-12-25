@@ -195,7 +195,7 @@ submission.csv
 
 ---
 
-## 🏁 Outcome
+## Outcome
 
 This project demonstrates:
 
@@ -205,7 +205,7 @@ This project demonstrates:
 
 ---
 
-## 📄 License
+## License
 
 This project is intended for **academic and educational use only**.
 Dataset ownership and licensing remain with the original Kaggle competition organizers. of this project
