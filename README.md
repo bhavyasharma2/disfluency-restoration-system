@@ -1,10 +1,10 @@
-# 🎙️ Hybrid ASR-NLP Disfluency Restoration System
+# Hybrid ASR-NLP Disfluency Restoration System
 
 > An end-to-end pipeline combining Whisper ASR, rule-based insertion modeling, bigram language scoring, and TF-IDF retrieval to restore disfluencies in spontaneous Hindi speech transcripts.
 
 ---
 
-## 📌 Overview
+## Overview
 
 Spontaneous speech is messy — speakers use fillers, repetitions, and hesitation markers (*disfluencies*) that get dropped during transcription. This project tackles **automatic disfluency restoration**: given a cleaned transcript and its corresponding audio, reinsert the disfluencies that were originally spoken.
 
@@ -12,7 +12,7 @@ Built for a competitive exam held by **IIT Madras**, this system achieved a **Wo
 
 ---
 
-## 🧠 Problem
+## Problem
 
 Given:
 - A **cleaned transcript** (disfluencies already removed)
@@ -28,7 +28,7 @@ Challenges:
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```
 Audio (.wav)  ──► Whisper ASR (tiny) ──────────────────────────┐
@@ -51,7 +51,7 @@ Clean Transcript ─────────────────────
 
 ---
 
-## ⚙️ Methodology
+## Methodology
 
 ### Step 1 — ASR Transcription (Whisper)
 - Audio files transcribed using `openai-whisper` (`tiny` model) with Hindi (`hi`) language setting
@@ -85,7 +85,7 @@ For test samples where ASR provides no useful signal:
 
 ---
 
-## 📊 Results
+## Results
 
 | Metric | Value |
 |---|---|
@@ -97,7 +97,7 @@ For test samples where ASR provides no useful signal:
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 ├── notebook.ipynb              # Full pipeline (Kaggle)
@@ -108,7 +108,7 @@ For test samples where ASR provides no useful signal:
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Downloading the Dataset
 
@@ -144,7 +144,7 @@ ffmpeg  # system dependency
 
 ---
 
-## 📝 Key Takeaways
+## Key Takeaways
 
 - **ASR as evidence, not ground truth**: Whisper's output is noisy, especially on short Hindi fillers. Treating it as a signal source rather than a direct answer was the key design decision.
 - **Edit distance verification prevents hallucination**: Rule B only accepts an insertion if it measurably closes the gap between the clean transcript and ASR output — this filters out spurious matches.
